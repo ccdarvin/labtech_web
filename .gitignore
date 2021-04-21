@@ -1,0 +1,7 @@
+
+**/media/**
+*.pyc
+**/.cache
+**/node_modules/**
+
+*.sqlite3

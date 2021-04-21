@@ -1,0 +1,55 @@
+{% load menu_tag wagtailimages_tags %}
+{% menu 'main' as main_nav %}
+<div class="py-4 shadow">
+    <div class="container">
+        <div class="row">
+            <div class="col-auto">
+                {% image settings.core.setting.logo max-250x50 %}
+            </div>
+            <div class="col d-xl-block d-none">
+                <ul class="nav justify-content-end fs-5">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">Inicio</a>
+                    </li>
+                    {% for item in main_nav.items %}
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="{{ item.value.page.url }}">{{ item.value.page }}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col d-xl-none">
+                <ul class="nav justify-content-end fs-5">
+                    <li class="nav-item">
+                        <a class="nav-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample" width="48" height="48" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+                            </svg>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas-header">
+        <div class="col-auto">
+            {% image settings.core.setting.logo max-250x50 %}
+        </div>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <ul class="nav flex-column fs-5">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/">Inicio</a>
+            </li>
+            {% for item in main_nav.items %}
+            <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="{{ item.value.page.url }}">{{ item.value.page }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

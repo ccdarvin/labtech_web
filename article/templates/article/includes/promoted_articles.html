@@ -1,0 +1,20 @@
+{% load wagtailimages_tags %}
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 g-4">
+    {% for pag in self.get_descendants.live.not_in_menu %}
+    <div class="col">
+        <div class="card border-0 shadow-sm">
+            {% image pag.specific.image height-200 format-webp-lossless as image %}
+            <div class="ratio ratio-16x9" >
+                <img src="{{image.url}}"
+                    alt="{{img.alt}}">
+            </div>
+            <div class="card-body">
+                <div class="ratio ratio-21x9">
+                    <a class="text-center" href="{{pag.url}}">{{pag.title}}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>

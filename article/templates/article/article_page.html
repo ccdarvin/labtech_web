@@ -1,0 +1,60 @@
+{% extends "article_base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+{% block extra_css %}
+
+{% comment %}
+Delete the line below if you're just getting started and want to remove the welcome screen!
+{% endcomment %}
+{% endblock extra_css %}
+
+{% block content %}
+{% comment %}
+Delete the line below if you're just getting started and want to remove the welcome screen!
+{% endcomment %}
+    {% image self.image height-400 format-webp-lossless as image %}
+    <div class="bg-secondary">
+        <div class="container ">
+            <div class="ratio ratio-21x9">
+                <img src="{{ image.url }}" />
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        {% include 'includes/breadcrumb.html' %}
+    </div>
+    <div class="container bg-white">
+        <div class="col-12 col-md-8 mx-auto">
+            <h1 class="py-3 text-primary">{{ self.title }}</h1>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-8 mx-auto">
+                <div class="col-auto">
+                    <div class="border-bottom py-3">
+                        {{ self.first_published_at|date  }}
+                    </div>
+                    <div class="border-bottom py-3">
+                        {% include "article/includes/social_icons.html" %}
+                    </div>
+                </div>
+                <div class="col">
+                {% for block in self.body %}
+                    {% if block.block_type == 'notebook' %}
+                        <div class="notebook">
+                        {{ block.value.html|safe }}
+                        </div>
+                    {% else %}
+                    {{ block }}
+                    {% endif %}
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container py-4">
+      {% include "article/includes/related_articles.html" %}
+    </div>
+
+{% endblock content %}

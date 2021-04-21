@@ -1,0 +1,21 @@
+{% extends "article_base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+{% block extra_css %}
+
+{% comment %}
+Delete the line below if you're just getting started and want to remove the welcome screen!
+{% endcomment %}
+{% endblock extra_css %}
+
+{% block content %}
+{% comment %}
+Delete the line below if you're just getting started and want to remove the welcome screen!
+{% endcomment %}
+    <div class="container">
+        {% include 'includes/breadcrumb.html' %}
+    </div>
+    <div class="container">
+        {% include "article/includes/promoted_articles.html" %}
+    </div>
+{% endblock content %}

@@ -1,0 +1,18 @@
+{% load menu_tag %}
+{% menu 'main' as main_nav %}
+<div class="py-4">
+    <div class="container">
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link text-white" aria-current="page" href="/">Inicio</a>
+            </li>
+            {% for item in main_nav.items %}
+            <li class="nav-item">
+                <a class="nav-link text-white" aria-current="page" href="{{ item.value.page.url }}">
+                {{ item.value.page }}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
