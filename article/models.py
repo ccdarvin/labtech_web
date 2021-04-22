@@ -18,13 +18,24 @@ from wagtail.core.models import Site
 
 
 class IndexPage(Page):
-    
+    image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
     def get_context(self, request):
         context = super().get_context(request)
 
         # Add extra variables and return the updated context
         context['article_list'] = context['self'].get_descendants().live().type(ArticlePage)
         return context
+
+    class Meta:
+        verbose_name ='Indice'
+        verbose_name_plural = 'Indices'
 
 
 class ArticlePage(Page):
@@ -35,10 +46,11 @@ class ArticlePage(Page):
         on_delete=models.SET_NULL,
         related_name='+'
     )
+
     body = StreamField([
-        ('paragraph', blocks.RichTextBlock()),
-        ('html', blocks.RawHTMLBlock()),
-        ('md', MarkdownBlock()),
+        ('paragraph', blocks.RichTextBlock(label='Editor de texto')),
+        ('html', blocks.RawHTMLBlock(label='HTML')),
+        ('md', MarkdownBlock(label='Markdown')),
         ('notebook', NotebookBlock())
     ], null=True, blank=True)
 
@@ -46,6 +58,13 @@ class ArticlePage(Page):
         ImageChooserPanel('image'),
         StreamFieldPanel('body'),
     ]
+
+    parent_page_types = ['article.IndexPage']
+    subpage_types = []
+
+    class Meta:
+        verbose_name = 'Articulo'
+        verbose_name_plural = 'Articulos'
 
     def get_context(self, request):
         context = super().get_context(request)

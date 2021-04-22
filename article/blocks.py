@@ -32,7 +32,8 @@ class NotebookBlock(blocks.StructBlock):
     ipynb = blocks.StaticBlock()
 
     class Meta:
-        icon = 'site'
+        label = 'Jupyter Notebook'
+        icon = 'link-external'
         value_class = NotebookStructValue
 
     def clean(self, value):
