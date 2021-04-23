@@ -1,34 +1,25 @@
 from .base import *
+import environ
+env = environ.Env()
 
-SECRET_KEY = '7_lse67x))co#it#yc&tcr8(bt-f9d_a8hy^$i@cjj54!_0t5c'
+SECRET_KEY = env.db('SECRET_KEY')
 
-DEBUG = True
+DEBUG = env.db('DEBUG', True)
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'sql_server.pyodbc',
-        'NAME': 'labtech-ai',
-        'USER': 'labtech-ai',
-        'PASSWORD': 'ai ! 683-fd$D',
-        'HOST': 'labtech-ai.database.windows.net',
-        'PORT': '1433',
+if 'DATABASE_URL' in env:
+    DATABASES['default'] = env.db('DATABASE_URL')
+    DATABASES['default']['ATOMIC_REQUESTS'] = True
+    DATABASES['default']['CONN_MAX_AGE'] = env.int('CONN_MAX_AGE', default=60)  # noqa F405
 
-        'OPTIONS': {
-            'driver': 'ODBC Driver 13 for SQL Server',
-        },
-    },
-}
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_S3_REGION_NAME = env.db('AWS_S3_REGION_NAME')
+AWS_S3_ENDPOINT_URL = env.db('AWS_S3_ENDPOINT_URL')
+AWS_ACCESS_KEY_ID = env.db('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = env.db('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = env.db('AWS_STORAGE_BUCKET_NAME') 
 
-#Serve;Database=labtech-ai;Uid=labtech-ai;Pwd={your_password_here};Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;
-DATABASE_CONNECTION_POOLING = False
-
-DEFAULT_FILE_STORAGE = 'storages.backends.azure_storage.AzureStorage'
-AZURE_ACCOUNT_NAME = 'labtechai'
-AZURE_ACCOUNT_KEY = 'j04o8xIO7wC0xGFllJ40872ZTU6Ii+N7lpI6OxsUIMY3IQ5w03CQRXRtKFduvJPKAk8WOcCfNHwnXWmbEYamkA=='
-#AZURE_CUSTOM_DOMAIN='cdn.labtech.ai'
-AZURE_CONTAINER = 'media'
-
-try:
-    from .local import *
-except ImportError:
-    pass
+# try:
+#     from .local import *
+# except ImportError:
+#     pass
+#
