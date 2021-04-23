@@ -3,7 +3,7 @@ import environ
 env = environ.Env()
 
 SECRET_KEY = env.db('SECRET_KEY')
-
+ALLOWED_HOSTS = env.db('ALLOWED_HOSTS')
 DEBUG = env.db('DEBUG', True)
 
 if 'DATABASE_URL' in env:
