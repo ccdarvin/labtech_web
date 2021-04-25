@@ -2,7 +2,7 @@
 FROM python:3.8.1-slim-buster
 
 # Add user that will be used in the container.
-RUN useradd wagtail
+# RUN useradd wagtail
 
 # Port used by this container to serve HTTP.
 EXPOSE 8000
@@ -12,7 +12,9 @@ EXPOSE 8000
 # 2. Set PORT variable that is used by Gunicorn. This should match "EXPOSE"
 #    command.
 ENV PYTHONUNBUFFERED=1 \
-    PORT=8000
+    PYTHONPATH=/app \
+    PORT=8000 \
+    WEB_CONCURRENCY=3
 
 # Install system packages required by Wagtail and Django.
 RUN apt-get update --yes --quiet && apt-get install --yes --quiet --no-install-recommends \
