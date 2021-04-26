@@ -6,3 +6,4 @@ psycopg2>=2.8.6
 django-environ>=0.4.5
 whitenoise>=5.2.0
 requests>=2.25.1
+gunicorn>=20.1.0
