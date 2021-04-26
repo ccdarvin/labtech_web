@@ -12,7 +12,8 @@ EXPOSE 8000
 # 2. Set PORT variable that is used by Gunicorn. This should match "EXPOSE"
 #    command.
 ENV PYTHONUNBUFFERED=1 \
-    PYTHONPATH=/app \ 
+    PYTHONPATH=/app \
+    DJANGO_SETTINGS_MODULE=labtech_web.settings.dev \
     PORT=8000  \ 
     WEB_CONCURRENCY=3
 
@@ -27,7 +28,7 @@ RUN apt-get update --yes --quiet && apt-get install --yes --quiet --no-install-r
  && rm -rf /var/lib/apt/lists/*
 
 # Install the application server.
-RUN pip install "gunicorn==20.0.4"
+RUN pip install "gunicorn>=20.0.4"
 
 # Install the project requirements.
 COPY requirements.txt /
@@ -62,4 +63,4 @@ RUN python manage.py collectstatic --noinput --clear
 RUN python manage.py migrate --noinput
 
 # Run application
-CMD gunicorn config.wsgi:application
+CMD gunicorn labtech_web.wsgi:application
