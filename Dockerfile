@@ -13,8 +13,7 @@ EXPOSE 8000
 #    command.
 ENV PYTHONUNBUFFERED=1 \
     PYTHONPATH=/app \
-    DJANGO_SETTINGS_MODULE=labtech_web.settings.dev \
-    PORT=8000  \ 
+    PORT=8000 \
     WEB_CONCURRENCY=3
 
 # Install system packages required by Wagtail and Django.
@@ -28,7 +27,7 @@ RUN apt-get update --yes --quiet && apt-get install --yes --quiet --no-install-r
  && rm -rf /var/lib/apt/lists/*
 
 # Install the application server.
-RUN pip install "gunicorn>=20.0.4"
+RUN pip install "gunicorn==20.0.4"
 
 # Install the project requirements.
 COPY requirements.txt /
@@ -40,13 +39,13 @@ WORKDIR /app
 # Set this directory to be owned by the "wagtail" user. This Wagtail project
 # uses SQLite, the folder needs to be owned by the user that
 # will be writing to the database file.
-# RUN chown wagtail:wagtail /app
+RUN chown wagtail:wagtail /app
 
 # Copy the source code of the project into the container.
-# COPY --chown=wagtail:wagtail . .
-COPY . .
+COPY --chown=wagtail:wagtail . .
+
 # Use user "wagtail" to run the build commands below and the server itself.
-# USER wagtail
+USER wagtail
 
 # Collect static files.
 RUN python manage.py collectstatic --noinput --clear
@@ -60,7 +59,4 @@ RUN python manage.py collectstatic --noinput --clear
 #   PRACTICE. The database should be migrated manually or using the release
 #   phase facilities of your hosting platform. This is used only so the
 #   Wagtail instance can be started with a simple "docker run" command.
-RUN python manage.py migrate --noinput
-
-# Run application
-CMD gunicorn labtech_web.wsgi:application
+CMD set -xe; python manage.py migrate --noinput; gunicorn labtech_web.wsgi:application
