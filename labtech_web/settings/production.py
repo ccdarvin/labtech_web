@@ -21,8 +21,7 @@ AWS_S3_CUSTOM_DOMAIN = env('AWS_S3_CUSTOM_DOMAIN')
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
 }
-AWS_LOCATION = 'static'
-AWS_DEFAULT_ACL = 'public-read'
+# AWS_DEFAULT_ACL = 'public-read'
 
 # try:
 #     from .local import *
