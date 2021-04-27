@@ -156,3 +156,7 @@ WAGTAIL_SITE_NAME = "labtech_web"
 BASE_URL = 'http://example.com'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# WAGTAILIMAGES_JPEG_QUALITY = 80
+# WAGTAILIMAGES_WEBP_QUALITY = 60

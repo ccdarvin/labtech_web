@@ -17,7 +17,11 @@ Delete the line below if you're just getting started and want to remove the welc
         <div class="container">
             <h1 class="position-absolute px-4 pt-3 text-light">{{self}}</h1>
         </div>
+        {% if image %}
         <img src="{{image.url}}" class="w-100"/>
+        {% else %}
+        <div class="no-image"></div>
+        {% endif %}
     </div>
     <div class="container">
         {% include 'includes/breadcrumb.html' %}

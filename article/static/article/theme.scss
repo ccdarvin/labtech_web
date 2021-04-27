@@ -15,8 +15,10 @@ $font-size-base: 1.2rem;
 @import "~bootstrap/scss/bootstrap";
 
 .article-header {
-    background-color: $secondary;
-    min-height: calc(100vw/6);
+    .no-image {
+        background-color: $secondary;
+        min-height: calc(100vw/6);
+    }
 }
 
 .article-card:hover{
