@@ -1,5 +1,4 @@
 
-
 // $body-bg: #C3C8D8;
 $body-color: #333;
 $primary: #BF2626;
@@ -13,5 +12,13 @@ $font-size-base: 1.2rem;
 // $Constant-Resurrections-4-hex: #8C1F1F;
 // $Constant-Resurrections-5-hex: #262626;
 
-
 @import "~bootstrap/scss/bootstrap";
+
+.article-header {
+    background-color: $secondary;
+    min-height: calc(100vw/6);
+}
+
+.article-card:hover{
+    box-shadow: 0 1rem 3rem rgba(0,0,0,.175)!important;
+}

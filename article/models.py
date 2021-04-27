@@ -26,11 +26,15 @@ class IndexPage(Page):
         related_name='+'
     )
 
+    content_panels = Page.content_panels + [
+        ImageChooserPanel('image')
+    ]
+
     def get_context(self, request):
         context = super().get_context(request)
 
         # Add extra variables and return the updated context
-        context['article_list'] = context['self'].get_descendants().live().type(ArticlePage)
+        context['article_list'] = context['self'].get_descendants().live().exact_type(ArticlePage)
         return context
 
     class Meta:
@@ -69,7 +73,7 @@ class ArticlePage(Page):
     def get_context(self, request):
         context = super().get_context(request)
         site = Site.find_for_request(request)
-        context['related_articles'] = ArticlePage.objects.in_site(site).live().type(ArticlePage).order_by('?')[:3]
+        context['related_articles'] = ArticlePage.objects.in_site(site).live().exact_type(ArticlePage).order_by('?')[:3]
         return context
 
 

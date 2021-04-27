@@ -12,6 +12,13 @@ Delete the line below if you're just getting started and want to remove the welc
 {% comment %}
 Delete the line below if you're just getting started and want to remove the welcome screen!
 {% endcomment %}
+    <div class='article-header'>
+        {% image self.image fill-1200x200 format-webp-lossless as image %}
+        <div class="container">
+            <h1 class="position-absolute px-4 pt-3 text-light">{{self}}</h1>
+        </div>
+        <img src="{{image.url}}" class="w-100"/>
+    </div>
     <div class="container">
         {% include 'includes/breadcrumb.html' %}
     </div>
