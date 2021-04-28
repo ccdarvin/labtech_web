@@ -4,7 +4,7 @@ env = environ.Env()
 
 SECRET_KEY = env('SECRET_KEY')
 ALLOWED_HOSTS = env('ALLOWED_HOSTS')
-DEBUG = env.bool('DEBUG')
+DEBUG = False
 
 if 'DATABASE_URL' in env:
     DATABASES['default'] = env.db('DATABASE_URL')
